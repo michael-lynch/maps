@@ -1,0 +1,14 @@
+body {
+	margin: 40px;
+}
+
+.map {
+	margin: 0 0 40px 0;
+	float: left;
+	width: 100%;
+	height: calc(100vh - 80px);
+}
+
+.hide {
+	display: none;
+}

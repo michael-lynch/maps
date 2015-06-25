@@ -1,0 +1,141 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<meta charset="utf-8">
+
+	<title>Maps jQuery Plugin</title>
+	
+	<meta name="description" content="">
+	
+	<meta name="author" content="http://michaelynch.com">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="src/css/styles.css">
+	
+</head>
+
+	<body lang="en">
+	
+		<div class="map map--facebook">
+		
+			<div class="map__info hide">
+		
+				<h2>Facebook</h2>
+				
+				<p>
+					1 Hacker Way
+					<br>Menlo Park, CA
+					<br>94025
+				</p>
+			
+			</div>
+		
+		</div>
+
+		<div class="map map--twitter">
+			
+			<div class="map__info hide">
+		
+				<h2>Twitter</h2>
+				
+				<p>
+					1355 Market St
+					<br>San Francisco, CA
+					<br>94103
+				</p>
+			
+			</div>
+			
+		</div>
+		
+		<div class="map map--dropbox">
+			
+			<div class="map__info hide">
+		
+				<h2>Dropbox</h2>
+				
+				<p>
+					185 Barry St.
+					<br>San Francisco, CA
+					<br>94107
+				</p>
+			
+			</div>
+			
+		</div>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		
+		<script src="src/maps.js"></script>
+		
+		<script>
+		
+			if($('.map').length) {
+	
+				$('.map--facebook').maps({
+					lat: 37.485013,
+					lng: -122.148499,
+					zoom: 12,
+					markers: [{
+						lat: 37.485013,
+						lng: -122.148499,
+						info_window: {
+							template: $('.map--facebook .map__info').html()
+						}
+					}],
+					success: function() {
+						
+						console.log('Map has been loaded');
+					
+						$('.map--twitter').maps({
+							load_api: false,
+							lat: 37.776942,
+							lng: -122.416798,
+							zoom: 12,
+							markers: [{
+								lat: 37.776942,
+								lng: -122.416798,
+								info_window: {
+									template: $('.map--twitter .map__info').html()
+								}
+				
+							}],
+							success: function() {
+							
+								console.log('Map has been loaded');
+								
+								$('.map--dropbox').maps({
+									load_api: false,
+									lat: 37.776753,
+									lng: -122.392045,
+									zoom: 12,
+									markers: [{
+										lat: 37.776753,
+										lng: -122.392045,
+										info_window: {
+											template: $('.map--dropbox .map__info').html()
+										}
+									}],
+									success: function() {
+										console.log('Map has been loaded');
+									}
+								});
+							}
+						});
+						
+					}
+				});
+			
+			}
+		
+		</script>
+
+	</body>
+	
+</html>
