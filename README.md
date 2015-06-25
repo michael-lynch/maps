@@ -10,7 +10,7 @@ Include jQuery and the plugin in the head or footer of your page.
 
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/js/plugins/maps"></script>
+<script src="/js/plugins/maps.js"></script>
 ```
     
 Initialize the plugin targeting the class, ID or element that you want the daily message to be inserted into and send the plugin your custom messages for each day. 
