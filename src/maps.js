@@ -24,6 +24,7 @@ Licensed under the MIT license
         	load_api: true,
             lat: null,
             lng: null,
+            zoom: 8,
             markers: [],
             scrollwheel: false,
             draggable: true,
