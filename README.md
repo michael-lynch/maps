@@ -6,10 +6,11 @@ Maps is a simple, lightweight jQuery plugin used to display Google maps.
 
 ##Instructions
 
-Include jQuery and the plugin in the head or footer of your page.
+Include jQuery, the Google Maps API and the plugin in the head or footer of your page.
 
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?v=3&sensor=true"></script>
 <script src="/js/plugins/maps.js"></script>
 ```
     
@@ -40,11 +41,6 @@ $('.map').maps({
 ####Options
 
 <ol>
-
-<li>
-load_api: boolean
-<br />A boolean that defines whether or not the Google Maps API should be loaded (default: true).
-</li>
 
 <li>
 lat: integer

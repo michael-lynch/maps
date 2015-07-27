@@ -13,13 +13,13 @@ Licensed under the MIT license
 
     $.fn.maps = function(options) {
     
-    	//return if no element was bound
-		//so chained events can continue
+    	// return if no element was bound
+		// so chained events can continue
 		if(!this.length) { 
 			return this; 
 		}
-
-		//define default parameters
+		
+		// define vars
         var defaults = {
         	load_api: true,
             lat: null,
@@ -30,24 +30,14 @@ Licensed under the MIT license
             draggable: true,
             disable_ui: false,
             zoom_control: true,
-            error: function(message) {},
-            success: function() {}
-        }
-
-        //define vars
-        var plugin = this,
-        	el = $(this);
-		
-		//define settings
-        plugin.settings = {};
- 
-        //merge defaults and options
-        plugin.settings = $.extend({}, defaults, options);
-
-		var s = plugin.settings;
-				
-        var createMarker = function(o) {
-        
+            success: function() {},
+            error: function() {},
+		},
+    	plugin = this,
+    	el = $(this),
+    	s = $.extend({}, defaults, options),
+		createMarker = function(o) {
+    
         	if(o.map) {
 				var myLatlng = new google.maps.LatLng(o.lat, o.lng),
 				marker = new google.maps.Marker({
@@ -61,28 +51,23 @@ Licensed under the MIT license
 			} else {
 				return false;
 			}
-        }
-        
-        var createInfoWindow = function(o) {
+		},
+        createInfoWindow = function(o) {
 	        
 	        var contentString = o.template,
-			infowindow = new google.maps.InfoWindow({
-				content: contentString
-			});
+				infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
 			
 			// marker click event
 			google.maps.event.addListener(o.marker, 'click', function() {
 				infowindow.open(o.map, o.marker);
 			});
-        }
-		
-		function createMaps() {
-			
-			el.each(function() {
-				
-				console.log($(this)[0]);
+        },
+        createMaps = function() {
 
-				var mapOptions = {
+			// set map options
+			var mapOptions = {
 					center: {
 						lat: s.lat,
 						lng: s.lng
@@ -93,65 +78,48 @@ Licensed under the MIT license
 					disableDefaultUI: (s.disable_ui) ? s.disable_ui : false,
 					zoomControl: (s.zoom_control) ? s.zoom_control : true
 				},
-				map = new google.maps.Map($(this)[0], mapOptions);
-				
-				if(s.markers) {
-				
-					for(var i = 0; i < s.markers.length; i++) {
+				map = new google.maps.Map(el[0], mapOptions);
 			
-						var markerObj = createMarker({
+			// if markers were included
+			if(s.markers) {
+			
+				// loop through each marker
+				for(var i = 0; i < s.markers.length; i++) {
+		
+					// create marker on map
+					var markerObj = createMarker({
+						map: map,
+						lat: s.markers[i].lat,
+						lng: s.markers[i].lng
+					});
+					
+					// if info_window was included in marker object
+					if(markerObj && s.markers[i].info_window.template) {
+			
+						// create info window
+						createInfoWindow({
 							map: map,
-							lat: s.markers[i].lat,
-							lng: s.markers[i].lng
+							marker: markerObj,
+							template: s.markers[i].info_window.template
 						});
-						
-						if(markerObj && s.markers[i].info_window.template) {
-				
-							createInfoWindow({
-								map: map,
-								marker: markerObj,
-								template: s.markers[i].info_window.template
-							});
-						
-						}
 					
 					}
 				
 				}
 			
-			});
+			}
 			
 			// run success callback
 			s.success.call(this);
 		}
 		
-		if(typeof window.google === 'object' && typeof window.google.maps === 'object') {
+		// if google api is loaded
+		if(window.google) {
 			createMaps();
+		} else {
+			// run error callback
+			s.error.call(this);
 		}
-		
-		if(s.load_api) {
-        
-	        var script = document.createElement("script");
-			
-			// set script attributes
-			script.type = "text/javascript";
-			script.src  = "http://maps.google.com/maps/api/js?v=3&sensor=true&callback=gmap_draw";
-			
-			// append script
-			$("head").append(script);
-		}
-
-        window.gmap_draw = function() {
-		
-			function initialize() {
-			
-				createMaps();
-				
-			}
-				
-			google.maps.event.addDomListener(window, 'load', initialize);
-				
-		};
     }
 
 })(jQuery);
