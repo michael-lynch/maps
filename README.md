@@ -85,7 +85,19 @@ markers: []
 <li>
 styles: []
 <br />An array of styles for individual features on the map (default: []).
-<p>Note that the array must be made up of objects that are in [the format Google expects](https://developers.google.com/maps/tutorials/customizing/styling-the-base-map). Here is a single style object with every possible styler set.</p>
+</li>
+
+<li>success: function()
+<br />A callback function that runs if the plugin is successfull (default: `function()`). 
+</li>
+
+<li>error: function()
+<br />A callback function that runs if the plugin fails (default: `function()`). 
+</li>
+
+</ol>
+
+<p><em>Note that the array must be made up of objects that are in [the format Google expects](https://developers.google.com/maps/tutorials/customizing/styling-the-base-map). Here is a single style object with every possible styler set.</em></p>
 
 ```js
 var styles = [
@@ -117,21 +129,8 @@ var styles = [
         {
             invert_lightness: true
         }
-    ]
 	}
 ];
 ```
 
-<p>[The Google Styled Maps Wizard](http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html?utm_medium=twitter) is a great tool for customizing your own styles and [SnazzyMaps](https://snazzymaps.com) has a great collection of premade styles to choose from.</p>
-
-</li>
-
-<li>success: function()
-<br />A callback function that runs if the plugin is successfull (default: `function()`). 
-</li>
-
-<li>error: function()
-<br />A callback function that runs if the plugin fails (default: `function()`). 
-</li>
-
-</ol>		
+<p>[The Google Styled Maps Wizard](http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html?utm_medium=twitter) is a great tool for customizing your own styles and [SnazzyMaps](https://snazzymaps.com) has a great collection of premade styles to choose from.</p>		
