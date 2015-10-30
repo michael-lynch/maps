@@ -30,6 +30,7 @@ Licensed under the MIT license
             draggable: true,
             disable_ui: false,
             zoom_control: true,
+            styles: [],
             success: function() {},
             error: function() {},
 		},
@@ -79,6 +80,11 @@ Licensed under the MIT license
 					zoomControl: (s.zoom_control) ? s.zoom_control : true
 				},
 				map = new google.maps.Map(el[0], mapOptions);
+			
+			// if styles were set	
+			if(s.styles.length) {
+				map.set('styles', s.styles);
+			}
 			
 			// if markers were included
 			if(s.markers) {

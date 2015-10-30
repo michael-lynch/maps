@@ -82,6 +82,50 @@ markers: []
 <br />An array of objects that define each marker that should be displayed on the map (default: null).
 </li>
 
+<li>
+styles: []
+<br />An array of styles for individual features on the map (default: []).
+<p>Note that the array must be made up of objects that are in [the format Google expects](https://developers.google.com/maps/tutorials/customizing/styling-the-base-map). Here is a single style object with every possible styler set.</p>
+
+```js
+var styles = [
+	{
+    	"featureType": "landscape",
+    	"elementType": "geometry",
+    	"stylers": [
+    	{
+           	 visibility: "on"
+        },
+        {
+            color: "#fefefe"
+        },
+        {
+            hue: "#dddddd"
+        },
+        {
+            lightness: 17
+        },
+        {
+            weight: 1.2
+        },
+        {
+            saturation: 36
+        },
+        {
+            gamma: 1
+        },
+        {
+            invert_lightness: true
+        }
+    ]
+	}
+];
+```
+
+<p>[The Google Styled Maps Wizard](http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html?utm_medium=twitter) is a great tool for customizing your own styles and [SnazzyMaps](https://snazzymaps.com) has a great collection of premade styles to choose from.</p>
+
+</li>
+
 <li>success: function()
 <br />A callback function that runs if the plugin is successfull (default: `function()`). 
 </li>
