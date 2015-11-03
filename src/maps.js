@@ -74,10 +74,10 @@ Licensed under the MIT license
 						lng: s.lng
 					},
 					zoom: s.zoom,
-					scrollwheel: (s.scrollwheel) ? s.scrollwheel : false,
-					draggable: (s.draggable) ? s.draggable : true,
-					disableDefaultUI: (s.disable_ui) ? s.disable_ui : false,
-					zoomControl: (s.zoom_control) ? s.zoom_control : true
+					scrollwheel: s.scrollwheel,
+					draggable: s.draggable,
+					disableDefaultUI: s.disable_ui,
+					zoomControl: s.zoom_control
 				},
 				map = new google.maps.Map(el[0], mapOptions);
 			
