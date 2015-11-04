@@ -97,7 +97,23 @@ styles: []
 
 </ol>
 
-*Note that the `styles` array must be made up of objects that are in [the format Google expects](https://developers.google.com/maps/tutorials/customizing/styling-the-base-map). Here is a single style object with every possible styler set.*
+*Note that the `markers` array must be made up of objects that are in this format:*
+
+```js
+$('.map').maps({
+	markers: [{
+		lat: 37.485013,
+		lng: -122.148499,
+		info_window: {
+			template: $(this).find('.map__info').html()
+		}
+		icon: 'path/to/icon.svg'
+	}]		
+});
+
+```
+
+*Also note that the `styles` array must be made up of objects that are in [the format Google expects](https://developers.google.com/maps/tutorials/customizing/styling-the-base-map). Here is a single style object with every possible styler set.*
 
 ```js
 var styles = [

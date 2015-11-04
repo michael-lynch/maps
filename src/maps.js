@@ -44,7 +44,8 @@ Licensed under the MIT license
 				marker = new google.maps.Marker({
 					position: (myLatlng) ? myLatlng : null,
 					map: (o.map) ? o.map : null,
-					title: (o.title) ? o.title : null
+					title: (o.title) ? o.title : null,
+					icon: (o.icon) ? o.icon : null
 				});
 				
 				return marker;
@@ -96,7 +97,8 @@ Licensed under the MIT license
 					var markerObj = createMarker({
 						map: map,
 						lat: s.markers[i].lat,
-						lng: s.markers[i].lng
+						lng: s.markers[i].lng,
+						icon: (s.markers[i].icon) ? s.markers[i].icon : null
 					});
 					
 					// if info_window was included in marker object
