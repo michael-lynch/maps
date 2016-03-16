@@ -1,20 +1,22 @@
-#Maps
+# Maps
 
 Maps is a simple, lightweight jQuery plugin used to display Google maps.
 
 <a href="http://michael-lynch.github.io/maps/" target="_blank">See a demo</a>
 
-##Instructions
+## Instructions
 
 Include jQuery, the Google Maps API and the plugin in the head or footer of your page.
 
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://maps.google.com/maps/api/js?v=3&sensor=true"></script>
+<script src="http://maps.google.com/maps/api/js?v=3&libraries=places"></script>
 <script src="/js/plugins/maps.js"></script>
 ```
-    
-Initialize the plugin targeting the class, ID or element that you want the daily message to be inserted into and send the plugin your custom messages for each day. 
+
+Note that the `places` library is required if you'd like to display places on the map.
+
+Initialize the plugin targeting the class, ID or element that you want to render the map with.
 
 ```js
 $('.map').maps({
@@ -32,13 +34,41 @@ $('.map').maps({
 	success: function() {
 	    console.log('Success!');
 	},
-	error: function() {
-	    console.log('Something went wrong.');
+	error: function(message) {
+	    console.log(message);
 	}		
 });
 ```
-	
-####Options
+
+```html
+<div class="map">
+	<div class="map__info">
+		This will display inside the tooltip that appears when you click on the marker.
+	</div>
+</div>
+```
+
+If you're using links to display place types on the map, the plugin expects the links to use a required `data-place-type` attribute and an optional `data-place-icon` attribute:
+
+```html
+<div class="location__places">
+	<a href="#" data-place-type="bank" data-place-icon="/path/to/icon/banks.png">Banks</a>
+	<a href="#" data-place-type="laundry" data-place-icon="/path/to/icon/laundry.png">Laundromats</a>
+	<a href="#" data-place-type="store" data-place-icon="/path/to/icon/stores.png">Stores</a>
+</div>
+```
+
+Then you'd initialize the plugin using the `places_links` property:
+
+```js
+$('.location__map').maps({
+	lat: 37.485013,
+	lng: -122.148499,
+	places_links: $('.location__places a')		
+});
+```
+
+#### Options
 
 <ol>
 
@@ -54,7 +84,7 @@ lng: integer
 
 <li>
 zoom: integer
-<br />An integer that defines how far the map should be zoomed in. Zooms range from 0-12. (default: 8).
+<br />An integer that defines how far the map should be zoomed in. The zoom value must be between 0-22. (default: 8).
 </li>
 
 <li>
@@ -87,12 +117,27 @@ styles: []
 <br />An array of styles for individual features on the map (default: []).
 </li>
 
+<li>
+places: []
+<br />An array of place types to be displayed on the map on load (default: []) See the list of available place types [here](https://developers.google.com/places/supported_types).
+</li>
+
+<li>
+places_links: $()
+<br />A jQuery object that defines the element(s) that will have the places click event bound to (default: null).
+</li>
+
+<li>
+places_radius: ''
+<br />A string that defines the maximum radius around the center point of the map in which nearby places will be displayed (default: '500').
+</li>
+
 <li>success: function()
-<br />A callback function that runs if the plugin is successfull (default: `function()`). 
+<br />A callback function that runs if the plugin is successful (default: `function()`).
 </li>
 
 <li>error: function()
-<br />A callback function that runs if the plugin fails (default: `function()`). 
+<br />A callback function that runs if the plugin fails (default: `function()`).
 </li>
 
 </ol>
@@ -149,4 +194,4 @@ var styles = [
 ];
 ```
 
-[The Google Styled Maps Wizard](http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html?utm_medium=twitter) is a great tool for customizing your own styles and [SnazzyMaps](https://snazzymaps.com) has a great collection of premade styles to choose from.	
+[The Google Styled Maps Wizard](http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html?utm_medium=twitter) is a great tool for customizing your own styles and [SnazzyMaps](https://snazzymaps.com) has a great collection of premade styles to choose from.
